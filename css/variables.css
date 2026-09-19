@@ -73,6 +73,23 @@
   --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
   --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quad: cubic-bezier(0.25, 1, 0.5, 1);
+   /* Código para corregir el desbordamiento en celulares */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Asegurar que todas las imágenes y contenedores se ajusten a la pantalla */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
 
   /* Dimensiones del Layout */
   --container-max-width: 1280px;
