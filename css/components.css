@@ -1,0 +1,940 @@
+/* ==========================================================================
+   PERIÓDICO CULTURA - COMPONENTES EDITORIALES Y WIDGETS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Noticia Principal (Hero Editorial)
+   -------------------------------------------------------------------------- */
+.main-news-section {
+  margin-bottom: 2.5rem;
+}
+
+.hero-news-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-gray-300);
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+@media (min-width: 900px) {
+  .hero-news-card {
+    grid-template-columns: 1.15fr 1fr;
+  }
+}
+
+.hero-media-wrapper {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-black);
+  min-height: 280px;
+}
+
+@media (min-width: 900px) {
+  .hero-media-wrapper {
+    min-height: 440px;
+  }
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform var(--transition-slow);
+}
+
+.hero-news-card:hover .hero-image {
+  transform: scale(1.02);
+}
+
+.hero-watermark {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--color-white);
+  font-size: 0.725rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+.hero-body {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .hero-body {
+    padding: 2.25rem;
+  }
+}
+
+.hero-meta-top {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-date {
+  font-size: 0.85rem;
+  color: var(--color-gray-600);
+  font-weight: var(--fw-medium);
+}
+
+.hero-title {
+  font-size: clamp(1.45rem, 2.8vw, 2.15rem);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  color: var(--color-black);
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title a:hover {
+  color: var(--color-primary);
+}
+
+.hero-excerpt {
+  font-size: 1.05rem;
+  color: var(--color-gray-700);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.hero-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.hero-author {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-gray-600);
+  font-weight: var(--fw-semibold);
+}
+
+/* --------------------------------------------------------------------------
+   2. Categorías y Filtros Dinámicos
+   -------------------------------------------------------------------------- */
+.category-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.75rem;
+  scrollbar-width: thin;
+}
+
+.filter-btn {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-300);
+  color: var(--color-gray-700);
+  font-size: 0.85rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.filter-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.filter-btn.active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   3. Grilla de Noticias Futuras / Feed
+   -------------------------------------------------------------------------- */
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .news-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.news-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-gray-300);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-gray-400);
+}
+
+.card-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background-color: var(--color-gray-200);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.news-card:hover .card-img {
+  transform: scale(1.04);
+}
+
+.card-category-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.card-content {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.775rem;
+  color: var(--color-gray-600);
+  margin-bottom: 0.65rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.card-title a {
+  color: var(--color-black);
+}
+
+.card-title a:hover {
+  color: var(--color-primary);
+}
+
+.card-excerpt {
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-gray-200);
+  font-size: 0.85rem;
+}
+
+.read-more-link {
+  font-weight: var(--fw-bold);
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.read-more-link:hover {
+  color: var(--color-primary-dark);
+}
+
+/* --------------------------------------------------------------------------
+   4. Carrusel de Publicaciones
+   -------------------------------------------------------------------------- */
+.carousel-section {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-300);
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.carousel-title-box {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.carousel-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.carousel-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--color-gray-200);
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.carousel-btn:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  cursor: grab;
+}
+
+.carousel-container.grabbing {
+  cursor: grabbing;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1.25rem;
+  transition: transform 400ms ease-in-out;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  min-width: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: var(--color-gray-100);
+  border: 1px solid var(--color-gray-300);
+  position: relative;
+}
+
+@media (min-width: 600px) {
+  .carousel-slide {
+    flex: 0 0 calc(50% - 0.625rem);
+  }
+}
+
+@media (min-width: 992px) {
+  .carousel-slide {
+    flex: 0 0 calc(33.333% - 0.833rem);
+  }
+}
+
+.slide-img-wrapper {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.slide-content {
+  padding: 1rem;
+}
+
+.slide-category {
+  margin-bottom: 0.5rem;
+}
+
+.slide-title {
+  font-size: 1rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.slide-date {
+  font-size: 0.775rem;
+  color: var(--color-gray-600);
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-gray-400);
+  transition: all var(--transition-fast);
+}
+
+.carousel-dot.active {
+  background-color: var(--color-primary);
+  width: 24px;
+  border-radius: var(--radius-pill);
+}
+
+/* --------------------------------------------------------------------------
+   5. Sistema Modular de Publicidad
+   -------------------------------------------------------------------------- */
+.ad-slot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.ad-label {
+  font-size: 0.65rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+  align-self: flex-start;
+}
+
+.ad-banner-top {
+  width: 100%;
+  max-width: 970px;
+  min-height: 90px;
+  background-color: var(--color-white);
+  border: 1px dashed var(--color-gray-400);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-sidebar {
+  width: 100%;
+  min-height: 250px;
+  background-color: var(--color-white);
+  border: 1px dashed var(--color-gray-400);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ad-in-feed {
+  width: 100%;
+  min-height: 110px;
+  background-color: var(--color-white);
+  border: 1px dashed var(--color-gray-400);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 1.75rem 0;
+}
+
+.ad-placeholder {
+  padding: 1.25rem;
+  text-align: center;
+  color: var(--color-gray-600);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.ad-placeholder-title {
+  font-weight: var(--fw-bold);
+  font-size: 0.875rem;
+  color: var(--color-black);
+}
+
+.ad-placeholder-desc {
+  font-size: 0.775rem;
+  color: var(--color-gray-500);
+}
+
+.ad-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.ad-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   6. Ubicación: Curuzú Cuatiá, Corrientes
+   -------------------------------------------------------------------------- */
+.location-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-300);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.location-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.location-title {
+  font-size: 1.2rem;
+  font-weight: var(--fw-black);
+  text-transform: uppercase;
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.location-badge {
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.map-container {
+  width: 100%;
+  height: 240px;
+  position: relative;
+  background-color: var(--color-gray-200);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.location-info-list {
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  background-color: var(--color-gray-100);
+  font-size: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .location-info-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.location-info-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-gray-700);
+}
+
+.location-info-item strong {
+  color: var(--color-black);
+}
+
+/* --------------------------------------------------------------------------
+   7. Clima en Curuzú Cuatiá
+   -------------------------------------------------------------------------- */
+.weather-card {
+  background: linear-gradient(135deg, var(--color-black) 0%, #262930 100%);
+  color: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  border-left: 4px solid var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.weather-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.weather-title-box h3 {
+  color: var(--color-white);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.weather-source-badge {
+  display: inline-block;
+  font-size: 0.675rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #E2E8F0;
+  margin-top: 0.25rem;
+}
+
+.weather-refresh-btn {
+  color: var(--color-gray-400);
+  padding: 0.35rem;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+}
+
+.weather-refresh-btn:hover {
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.weather-temp-huge {
+  font-size: 3rem;
+  font-weight: var(--fw-black);
+  line-height: 1;
+  color: var(--color-white);
+  letter-spacing: -0.03em;
+}
+
+.weather-temp-huge span {
+  font-size: 1.8rem;
+  color: var(--color-primary-light);
+}
+
+.weather-condition {
+  display: flex;
+  flex-direction: column;
+}
+
+.condition-text {
+  font-size: 1.1rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+}
+
+.thermal-feel {
+  font-size: 0.825rem;
+  color: var(--color-gray-400);
+}
+
+.weather-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+.weather-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-stat-label {
+  color: var(--color-gray-400);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.weather-stat-val {
+  color: var(--color-white);
+  font-weight: var(--fw-bold);
+  font-size: 0.925rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. Modal Reader / Lector de Noticias (<dialog>)
+   -------------------------------------------------------------------------- */
+.article-dialog {
+  border: none;
+  border-radius: var(--radius-lg);
+  max-width: 820px;
+  width: 92%;
+  margin: auto;
+  padding: 0;
+  box-shadow: var(--shadow-xl);
+  background: var(--color-white);
+  color: var(--color-gray-800);
+  overflow: hidden;
+}
+
+.article-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.dialog-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: var(--fw-black);
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.dialog-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-gray-200);
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all var(--transition-fast);
+}
+
+.dialog-close-btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.dialog-body {
+  padding: 1.5rem 1.5rem 2.5rem;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .dialog-body {
+    padding: 2rem 2.5rem 3rem;
+  }
+}
+
+.dialog-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.dialog-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+  font-weight: var(--fw-black);
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+  color: var(--color-black);
+}
+
+.dialog-lead {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  font-weight: var(--fw-medium);
+  color: var(--color-gray-700);
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.dialog-featured-media {
+  margin-bottom: 1.75rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.dialog-featured-img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.dialog-caption {
+  font-size: 0.8rem;
+  color: var(--color-gray-600);
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.dialog-author-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-gray-200);
+  font-size: 0.85rem;
+  color: var(--color-gray-600);
+}
+
+.dialog-text-content {
+  font-family: var(--font-serif);
+  font-size: 1.075rem;
+  line-height: 1.8;
+  color: #24292F;
+  margin-bottom: 2rem;
+}
+
+.dialog-text-content p {
+  margin-bottom: 1.35rem;
+}
+
+.dialog-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.dialog-tag {
+  background-color: var(--color-gray-200);
+  color: var(--color-gray-800);
+  font-size: 0.775rem;
+  font-weight: var(--fw-semibold);
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-pill);
+}
+
+.share-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--color-black);
+  flex-wrap: wrap;
+}
+
+.share-label {
+  font-size: 0.85rem;
+  font-weight: var(--fw-black);
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: var(--fw-bold);
+  color: var(--color-white);
+  transition: opacity var(--transition-fast);
+}
+
+.share-btn:hover {
+  opacity: 0.88;
+}
+
+.share-whatsapp { background-color: #25D366; }
+.share-facebook { background-color: #1877F2; }
+.share-twitter { background-color: #000000; }
+.share-copy { background-color: var(--color-gray-700); }
+
+/* Toast notification */
+.toast-notice {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border-left: 4px solid var(--color-primary);
+  font-size: 0.875rem;
+  font-weight: var(--fw-semibold);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: slideInUp 250ms ease forwards;
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
